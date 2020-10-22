@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/name: nginx-ansible-demo
 spec:
     tower_auth_secret: toweraccess
-    job_template_name: f5-gslb-publish
+    job_template_name: etcdbackup
     extra_vars:
       BASE_DOMAIN: jnphub01.dev06.red-chesterfield.com
       BASE_AWS_DOMAIN: dev06.red-chesterfield.com
