@@ -1,0 +1,11 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Channel
+metadata:
+  name: etcd
+  namespace: policies
+spec:
+  type: GitHub
+  pathname: https://github.com/ch-stark/ansible-etcd-rhacm.git
+  #secretRef:
+  #  name: my-github-secret
