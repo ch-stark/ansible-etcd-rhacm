@@ -33,6 +33,10 @@ spec:
                 spec:
                   encryption:
                     type: identity 
+                                status:
+                status:
+                  conditions:
+                    decrypted: true 
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
