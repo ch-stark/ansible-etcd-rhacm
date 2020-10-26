@@ -1,0 +1,28 @@
+object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: config.openshift.io/v1
+                kind: APIServer
+                metadata:
+                  name: cluster
+                spec:
+                  encryption:
+                    type: identity
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: config.openshift.io/v1
+                kind: APIServer
+                metadata:
+                  name: cluster
+                spec:
+                  encryption:
+                    type: identity
+                status:
+                  conditions:
+                    - message: >-
+                        Encryption mode set to identity and everything is
+                        decrypted
+                      reason: DecryptionCompleted
+          remediationAction: inform
+          severity: low
+  remediationAction: inform
