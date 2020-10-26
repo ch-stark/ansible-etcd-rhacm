@@ -2,6 +2,7 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: Policy
 metadata:
   name: policy-etcdencryption-status
+  namespace: default
   annotations:
     policy.open-cluster-management.io/standards: NIST SP 800-53
     policy.open-cluster-management.io/categories: CM Configuration Management
@@ -33,26 +34,42 @@ spec:
                 status:
                   conditions:
                     - message: >-
-                        All resources encrypted: routes.route.openshift.io, oauthaccesstokens.oauth.openshift.io, oauthauthorizetokens.oauth.openshift.io 
-                      reason: EncryptionCompleted    
+                        All resources encrypted: routes.route.openshift.io,
+                        oauthaccesstokens.oauth.openshift.io,  
+                        oauthauthorizetokens.oauth.openshift.io 
+                      reason: EncryptionCompleted
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: enable-etcd-encryption-status
+        spec:
+          remediationAction: inform
+          severity: low
+          namespaceSelector:
+            exclude:
+              - kube-*
+            include:
+              - default
           object-templates:
             - complianceType: musthave
-              objectDefinition:
-                apiVersion: config.openshift.io/v1
-                kind: KubeAPIServer
-                metadata:
-                  name: cluster
-                status:
-                  conditions:
-                    - message: >-
-                        All resources encrypted: secrets, configmaps
-                      reason: EncryptionCompleted    
-
+              object-templates:
+                - complianceType: musthave
+                  objectDefinition:
+                    apiVersion: config.openshift.io/v1
+                    kind: KubeAPIServer
+                    metadata:
+                      name: cluster
+                    status:
+                      conditions:
+                        - message: 'All resources encrypted: secrets, configmaps'
+                          reason: EncryptionCompleted
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
 metadata:
   name: binding-policy-etcdencryption-status
+  namespace: default
 placementRef:
   name: placement-policy-etcdencryption-status
   kind: PlacementRule
@@ -66,6 +83,7 @@ apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
   name: placement-policy-etcdencryption-status
+  namespace: default
 spec:
   clusterConditions:
   - status: "True"
@@ -73,4 +91,3 @@ spec:
   clusterSelector:
     matchExpressions:
       - {key: env, operator: In, values: ["dev"]}
-
