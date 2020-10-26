@@ -7,8 +7,6 @@ metadata:
     apps.open-cluster-management.io/github-path: policy/namespace
     apps.open-cluster-management.io/github-branch: master
 spec:
-  hooksecretref: 
-    name: toweraccess
   channel: policies/etcdtest
   placement:
    local: true
