@@ -62,8 +62,9 @@ spec:
                       name: cluster
                     status:
                       conditions:
-                        - message: 'All resources encrypted: secrets, configmaps'
-                          reason: EncryptionCompleted
+                        - message: >-
+                            All resources encrypted: secrets, configmaps 
+                          reason: EncryptionCompleted  
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
