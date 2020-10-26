@@ -15,7 +15,7 @@ spec:
         apiVersion: policy.open-cluster-management.io/v1
         kind: ConfigurationPolicy
         metadata:
-          name: enable-etcd-encryption-status
+          name: enable-etcd-encryption-status-openshift
         spec:
           remediationAction: inform
           severity: low
@@ -42,7 +42,7 @@ spec:
         apiVersion: policy.open-cluster-management.io/v1
         kind: ConfigurationPolicy
         metadata:
-          name: enable-etcd-encryption-status
+          name: enable-etcd-encryption-status-kube
         spec:
           remediationAction: inform
           severity: low
