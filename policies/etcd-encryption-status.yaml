@@ -27,18 +27,27 @@ spec:
             - complianceType: musthave
               objectDefinition:
                 apiVersion: config.openshift.io/v1
-                kind: APIServer
+                kind: OpenShiftAPIServer
                 metadata:
                   name: cluster
-                spec:
-                  encryption:
-                    type: aescbc
                 status:
                   conditions:
                     - message: >-
-                        Encryption mode set to identity and everything is
-                        decrypted
-                      reason: DecryptionCompleted    
+                        All resources encrypted: routes.route.openshift.io, oauthaccesstokens.oauth.openshift.io, oauthauthorizetokens.oauth.openshift.io 
+                      reason: EncryptionCompleted    
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: config.openshift.io/v1
+                kind: KubeAPIServer
+                metadata:
+                  name: cluster
+                status:
+                  conditions:
+                    - message: >-
+                        All resources encrypted: secrets, configmaps
+                      reason: EncryptionCompleted    
+
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
